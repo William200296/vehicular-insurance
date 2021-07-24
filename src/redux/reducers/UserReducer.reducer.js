@@ -28,6 +28,7 @@ const SAVE_CAR_DATA = 'SAVE_CAR_DATA';
 const SAVE_AMOUNT = 'SAVE_AMOUNT';
 const SAVE_STEP = 'SAVE_STEP';
 const SET_NAV_STYLES = 'SET_NAV_STYLES';
+const SET_STORED_USER = 'SET_STORED_USER';
 
 
 export default function reducerVehicularInsurance(state = initialState, action) {
@@ -61,6 +62,11 @@ export default function reducerVehicularInsurance(state = initialState, action) 
             return {
                 ...state,
                 navStyles: action.payload.navStyles
+            }
+        case SET_STORED_USER:
+            return {
+                ...state,
+                storedUser: action.payload.storedUser
             }
         default:
             return state;
@@ -152,6 +158,23 @@ export const updateNavStyles = (navStyles) => async (dispatch, getState) => {
             type: SET_NAV_STYLES,
             payload: {
                 navStyles: navStyles
+            }
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
+export const updateStoredUser = (storedUser) => async (dispatch, getState) => {
+    try {
+
+        dispatch({
+            type: SET_STORED_USER,
+            payload: {
+                storedUser: storedUser
             }
         });
 

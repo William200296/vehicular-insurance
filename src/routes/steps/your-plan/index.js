@@ -29,17 +29,17 @@ const YourPlan = () => {
 		if (!storedUser) {
 			history.push('/');
 		}
-	}, [storedUser]);
+	}, [history, storedUser]);
 	
 	useEffect(() => {
 		setCurrentStep(2);
 		dispatch(saveCurrentStep(currentStep));
-	}, [currentStep]);
+	}, [dispatch, currentStep]);
 
 	useEffect(() => {
 		setNavStyles(true);
 		dispatch(updateNavStyles(navStyles));
-	}, [navStyles]);
+	}, [dispatch, navStyles]);
 
 	const list = [
 		'Llanta de respuesto',

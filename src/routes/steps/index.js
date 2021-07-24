@@ -38,13 +38,13 @@ const StepsSVT = () => {
 
                     <div className="back-navigator-home">
 
-                        <Link to="/" className="go-back back-desktop">
+                        <Link to={currentStep === 2 ? '/seguro-vehicular/datos-del-auto' : '/'} className="go-back back-desktop">
                             <img src={backButton} alt="Volver atrás" />
                             VOLVER
                         </Link>
 
                         <div className="go-back back-mobile">
-                            <Link to="/">
+                            <Link to={currentStep === 2 ? '/seguro-vehicular/datos-del-auto' : '/'}>
                                 <img src={backButtonAlt} alt="Volver atrás" />
                             </Link>
                             <div className="step-line">

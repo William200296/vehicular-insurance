@@ -17,12 +17,12 @@ const ThanksCongrats = () => {
 		if (!storedUser) {
 			history.push('/');
 		}
-	}, [storedUser]);
+	}, [history, storedUser]);
 
 	useEffect(() => {
 		setNavStyles(true);
 		dispatch(updateNavStyles(navStyles));
-	}, [navStyles]);
+	}, [dispatch, navStyles]);
 
 	return (
 		<Fragment>

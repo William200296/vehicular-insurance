@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import BannerHome from './BannerHome';
 import axios from 'axios';
 import { useHistory, withRouter } from 'react-router-dom';
-import { getUserDataReq, saveUserData, updateNavStyles } from '../../redux/reducers/UserReducer.reducer';
+import { getUserDataReq, saveUserData, updateNavStyles, updateStoredUser } from '../../redux/reducers/UserReducer.reducer';
 import { useForm } from 'react-hook-form';
 
 const Home = () => {
@@ -18,6 +18,9 @@ const Home = () => {
 	const nav = useSelector(store => store.storedData.navStyles);
 	const [navStyles, setNavStyles] = useState(nav);
 
+	const sU = useSelector(store => store.storedData.storedUser);
+	const [storedUSer, setStoredUSer] = useState(sU);
+
 	const { register, handleSubmit, formState: { errors } } = useForm();
 	const onSubmit = (dataForm) => {
 		validateVehicularInsurance(dataForm);
@@ -26,7 +29,12 @@ const Home = () => {
 	useEffect(() => {
 		setNavStyles(false);
 		dispatch(updateNavStyles(navStyles));
-	}, [navStyles]);
+	}, [dispatch, navStyles]);
+
+	useEffect(() => {
+		setStoredUSer(false);
+		dispatch(updateStoredUser(storedUSer));
+	}, [dispatch, storedUSer]);
 
 	function handleChange(e) {
 

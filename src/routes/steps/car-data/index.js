@@ -31,17 +31,17 @@ const CarData = () => {
 			history.push('/');
 		}
 		console.log(history);
-	}, [storedUser]);
+	}, [history, storedUser]);
 
 	useEffect(() => {
 		setCurrentStep(1);
 		dispatch(saveCurrentStep(currentStep));
-	}, [currentStep]);
+	}, [dispatch, currentStep]);
 
 	useEffect(() => {
 		setNavStyles(true);
 		dispatch(updateNavStyles(navStyles));
-	}, [navStyles]);
+	}, [dispatch, navStyles]);
 
 	function handleChange(e) {
 
@@ -85,9 +85,10 @@ const CarData = () => {
 		setCarDataForm({ ...carDataForm, insuredAmount: insuredAmountValue });
 	}
 
-	function saveStage(carDataForm) {
-		console.log('DATOS_VEHICULO:', carDataForm);
-		dispatch(saveCarData(carDataForm));
+	function saveStage(dataFormulary) {
+		dataFormulary.insuredAmount = carDataForm.insuredAmount;
+		console.log('DATOS_VEHICULO:', dataFormulary);
+		dispatch(saveCarData(dataFormulary));
 		history.push('/seguro-vehicular/arma-tu-plan');
 	}
 
@@ -166,7 +167,7 @@ const CarData = () => {
 						<div className="container-radio-green">
 							<span
 								name="gas"
-								className="radio-green"
+								className={carDataForm.carGas === true ? 'radio-green selected' : 'radio-green'}
 								onClick={(e) => { toggleRadio(e, true) }}
 							></span> Sí
 						</div>
@@ -174,7 +175,7 @@ const CarData = () => {
 						<div className="container-radio-green">
 							<span
 								name="gas"
-								className="radio-green"
+								className={carDataForm.carGas === false ? 'radio-green selected' : 'radio-green'}
 								onClick={(e) => { toggleRadio(e, false) }}
 							></span> No
 						</div>
@@ -189,11 +190,17 @@ const CarData = () => {
 					</div>
 
 					<div className="amount-component">
-						<button type="button" onClick={(e) => { updateInsuredAmount(e, '-') }}>-</button>
+						<button type="button" onClick={(e) => { updateInsuredAmount(e, '-') }}>
+							-
+						</button>
+
 						<p id="txtAmountInsurante">
 							{'$ ' + carDataForm.insuredAmount.toString().slice(0, -3) + ',' + carDataForm.insuredAmount.toString().slice(2)}
 						</p>
-						<button type="button" onClick={(e) => { updateInsuredAmount(e, '+') }}>+</button>
+
+						<button type="button" onClick={(e) => { updateInsuredAmount(e, '+') }}>
+							+
+						</button>
 					</div>
 
 				</div>
